@@ -16,13 +16,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // paginate the authorized user's tasks with 5 per page
+        // paginate the authorized user's tasks with 10 per page
         $tasks = Auth::user()
             ->tasks()
+            ->where('assigned_to', Auth::user()->id)
             ->orderBy('is_complete')
             ->orderByDesc('created_at')
-            ->where('assigned_to', 'is', Auth::user()->name)
-            ->paginate(5);
+            ->paginate(10);
 
         // return task index view with paginated tasks
         return view('tasks', [
@@ -34,12 +34,12 @@ class TaskController extends Controller
     public function index_create()
     {
          $users = DB::table('users')->get();
-        // paginate the authorized user's tasks with 5 per page
+        // paginate the authorized user's tasks with 10 per page
         $tasks = Auth::user()
             ->tasks()
             ->orderBy('is_complete')
             ->orderByDesc('created_at')
-            ->paginate(5);
+            ->paginate(10);
 
         // return task index view with paginated tasks
         return view('create_task', [
@@ -68,13 +68,15 @@ class TaskController extends Controller
         Auth::user()->tasks()->create([
             'title' => $data['title'],
             'assigned_by' => Auth::user()->name,
-            'user_id' => $data['assigned_to'],
             'deadline' => $data['deadline'],
+            'assigned_to' => $data['assigned_to'],
             'is_complete' => false,
         ]);
+        //Update user_id pentru ca nu imi mergea din array-ul de mai sus
+        Auth::user()->tasks()->update(['user_id' => $data['assigned_to']]);
 
         // flash a success message to the session
-        session()->flash('status', 'Task Created!'.$data['assigned_to']);
+        session()->flash('status', 'Task Created for UserID '.$data['assigned_to']);
 
         // redirect to tasks index
         return redirect('/tasks');

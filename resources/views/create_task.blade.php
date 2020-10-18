@@ -39,6 +39,8 @@
                                     
                                     @endforeach
                                 </select>
+                            @else
+                                <input type="hidden" name="assigned_to" id="assigned_to" value="{{Auth::user()->id}}">
                             @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
