@@ -40,7 +40,7 @@
                                   <form method="POST" >
                                            @csrf
                                            @method('DELETE')
-                                           <button type="submit" class="btn btn-delete-action" formaction="{{ route('delete', $task->id) }}">X</button>
+                                           <button type="submit" class="btn btn-delete-action" formaction="{{ route('delete_task', $task->id) }}">X</button>
                                            
                                        </form>
                                    @if (! $task->is_complete)
@@ -48,6 +48,14 @@
                                            @csrf
                                            @method('PATCH')
                                            <button type="submit" class="btn btn-primary">✔</button>
+                                       </form>
+                                   @endif
+
+                                   @if ($task->is_complete)
+                                       <form method="POST" action="{{ route('unmark_task', $task->id) }}">
+                                           @csrf
+                                           @method('POST')
+                                           <button type="submit" class="btn btn-delete-action">!</button>
                                        </form>
                                    @endif
                                    

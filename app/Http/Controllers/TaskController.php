@@ -91,7 +91,21 @@ class TaskController extends Controller
         $task->save();
 
         // flash a success message to the session
-        session()->flash('status', 'Task Completed!');
+        session()->flash('status', 'Task Completed');
+
+        // redirect to tasks index
+        return redirect('/tasks');
+    }
+
+    public function update_unmark(Task $task)
+    {
+
+        // mark the task as un-complete and save it
+        $task->is_complete = false;
+        $task->save();
+
+        // flash a success message to the session
+        session()->flash('status', 'Task Unmarked!');
 
         // redirect to tasks index
         return redirect('/tasks');

@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function() {
             'update' , 'index', 'store'
         ]
     ]);
-    Route::delete('tasks/{task}', [TaskController::class, 'delete'])->name('delete');
-    //Route::get('/create_task', [TaskController::class, 'index_create']);
+    Route::delete('tasks/{task}', [TaskController::class, 'delete'])->name('delete_task');
+    Route::post('tasks/{task}', [TaskController::class, 'update_unmark'])->name('unmark_task');
 
 });
