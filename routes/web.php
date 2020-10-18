@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/create_task', [TaskController::class, 'index_create']);
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('tasks', 'TaskController', [

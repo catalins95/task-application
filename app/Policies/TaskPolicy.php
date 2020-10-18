@@ -1,6 +1,6 @@
 <?php
 namespace App\Policies;
-use App\Models\Models\Task;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;class TaskPolicy
 {

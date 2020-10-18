@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Models\Task;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +24,22 @@ class TaskController extends Controller
 
         // return task index view with paginated tasks
         return view('tasks', [
+            'tasks' => $tasks
+        ]);
+    }
+
+
+    public function index_create()
+    {
+        // paginate the authorized user's tasks with 5 per page
+        $tasks = Auth::user()
+            ->tasks()
+            ->orderBy('is_complete')
+            ->orderByDesc('created_at')
+            ->paginate(5);
+
+        // return task index view with paginated tasks
+        return view('create_task', [
             'tasks' => $tasks
         ]);
     }
@@ -76,4 +92,6 @@ class TaskController extends Controller
         // redirect to tasks index
         return redirect('/tasks');
     }
+
+
 }
