@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title');
             $table->string('assigned_by');
+            $table->string('assigned_to');
             $table->string('deadline');
             $table->boolean('is_complete');
             $table->timestamps();            $table

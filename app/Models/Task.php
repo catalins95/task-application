@@ -25,6 +25,8 @@ class Task extends Model
         'title',
         'deadline',
         'assigned_by',
+        'assigned_to',
+        'user_id',
         'is_complete',
     ];
 

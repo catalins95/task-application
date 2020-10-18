@@ -17,18 +17,28 @@
                     <form method="POST" action="{{ route('tasks.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input id="title" name="title" type="text" maxlength="255" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" autocomplete="off" />
+                            Task Info: <input id="title" name="title" type="text" maxlength="255" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" autocomplete="off" />
                             @if ($errors->has('title'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
                             @endif
-                            <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" />
+                            Task Deadline: <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" />
                             @if ($errors->has('deadline'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('deadline') }}</strong>
                                 </span>
+                            @endif
+
+                            @if (Auth::user()->level > 9)
+                                Assign To: 
+                                <select name="assigned_to" id="assigned_to">
+                                    @foreach ($users as $user)
+                                    
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
