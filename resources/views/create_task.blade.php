@@ -24,6 +24,12 @@
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
                             @endif
+                            <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" />
+                            @if ($errors->has('deadline'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('deadline') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>

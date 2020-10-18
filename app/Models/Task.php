@@ -13,6 +13,7 @@ class Task extends Model
      */
     protected $casts = [
         'is_complete' => 'boolean',
+        //'assigned_by' => 'boolean',
     ];
 
     /**
@@ -22,6 +23,8 @@ class Task extends Model
      */
     protected $fillable = [
         'title',
+        'deadline',
+        'assigned_by',
         'is_complete',
     ];
 

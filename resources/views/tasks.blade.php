@@ -20,6 +20,7 @@
                               <th>Date</th>
                               <th>Task Info</th>
                               <th>Assigned By</th>
+                              <th>Deadline</th>
                               <th>Actions</th>
                           </tr>
                        @foreach ($tasks as $task)
@@ -32,7 +33,8 @@
                                        {{ $task->title }}
                                    @endif
                                </td>
-                               <td> .. </td>
+                               <td> {{ $task->assigned_by }} </td>
+                               <td> {{ $task->deadline }} </td>
                                <td class="text-right">
 
                                   <form method="POST" >

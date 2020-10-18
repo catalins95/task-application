@@ -36,7 +36,7 @@ class TaskController extends Controller
             ->tasks()
             ->orderBy('is_complete')
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(5);
 
         // return task index view with paginated tasks
         return view('create_task', [
@@ -55,11 +55,15 @@ class TaskController extends Controller
         // validate the given request
         $data = $this->validate($request, [
             'title' => 'required|string|max:255',
+            'deadline' => 'required',
+            'assigned_by' => 'max:255',
         ]);
 
         // create a new incomplete task with the given title
         Auth::user()->tasks()->create([
             'title' => $data['title'],
+            'assigned_by' => Auth::user()->name,
+            'deadline' => $data['deadline'],
             'is_complete' => false,
         ]);
 
