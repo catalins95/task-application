@@ -25,8 +25,9 @@ Route::get('/create_task', [TaskController::class, 'index_create']);
 Route::middleware(['auth'])->group(function() {
     Route::resource('tasks', 'TaskController', [
         'only' => [
-            'index', 'store', 'update'
+            'update' , 'index', 'store'
         ]
     ]);
+    Route::delete('tasks/{task}', [TaskController::class, 'delete'])->name('delete');
 
 });

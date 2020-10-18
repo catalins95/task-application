@@ -15,4 +15,8 @@ use Illuminate\Auth\Access\HandlesAuthorization;class TaskPolicy
     {
         return $user->is($task->user);
     }
+    public function delete(User $user, Task $task)
+    {
+        return $user->is($task->user);
+    }
 }

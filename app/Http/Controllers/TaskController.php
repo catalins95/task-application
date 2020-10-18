@@ -36,7 +36,7 @@ class TaskController extends Controller
             ->tasks()
             ->orderBy('is_complete')
             ->orderByDesc('created_at')
-            ->paginate(5);
+            ->paginate(10);
 
         // return task index view with paginated tasks
         return view('create_task', [
@@ -88,6 +88,26 @@ class TaskController extends Controller
 
         // flash a success message to the session
         session()->flash('status', 'Task Completed!');
+
+        // redirect to tasks index
+        return redirect('/tasks');
+    }
+
+
+    /**
+     * Remove the specified task from storage.
+     *
+     * @param  \App\Models\Task  $task
+     * @return \Illuminate\Http\Response
+     */
+
+    public function delete(Task $task)
+    {
+
+        $task->delete();
+
+        // flash a success message to the session
+        session()->flash('status', 'Task deleted!');
 
         // redirect to tasks index
         return redirect('/tasks');

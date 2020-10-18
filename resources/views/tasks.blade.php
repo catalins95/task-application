@@ -16,8 +16,15 @@
 
                 <div class="card-body">
                    <table class="table table-striped">
+                          <tr>
+                              <th>Date</th>
+                              <th>Task Info</th>
+                              <th>Assigned By</th>
+                              <th>Actions</th>
+                          </tr>
                        @foreach ($tasks as $task)
                            <tr>
+                                <td>{{ $task->created_at }} </td>
                                <td>
                                    @if ($task->is_complete)
                                        <s>{{ $task->title }}</s>
@@ -25,14 +32,23 @@
                                        {{ $task->title }}
                                    @endif
                                </td>
+                               <td> .. </td>
                                <td class="text-right">
+
+                                  <form method="POST" >
+                                           @csrf
+                                           @method('DELETE')
+                                           <button type="submit" class="btn btn-delete-action" formaction="{{ route('delete', $task->id) }}">X</button>
+                                           
+                                       </form>
                                    @if (! $task->is_complete)
                                        <form method="POST" action="{{ route('tasks.update', $task->id) }}">
                                            @csrf
                                            @method('PATCH')
-                                           <button type="submit" class="btn btn-primary">Complete</button>
+                                           <button type="submit" class="btn btn-primary">✔</button>
                                        </form>
                                    @endif
+                                   
                                </td>
                            </tr>
                        @endforeach

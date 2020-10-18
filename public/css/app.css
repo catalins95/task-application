@@ -2666,6 +2666,18 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-delete-action {
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+.btn-delete-action:hover {
+  color: #fff;
+  background-color: #650000;
+  border-color: #650000;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #3490dc;
