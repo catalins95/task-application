@@ -27,11 +27,13 @@
                            <tr>
                                 <td>{{ $task->created_at }} </td>
                                <td>
-                                   @if ($task->is_complete)
-                                       <s>{{ $task->title }}</s>
-                                   @else
-                                       {{ $task->title }}
-                                   @endif
+                                  <a href='/view_task/{{ $task->id }}'>
+                                     @if ($task->is_complete)
+                                         <s>{{ $task->title }}</s>
+                                     @else
+                                         {{ $task->title }}
+                                     @endif
+                                  </a>
                                </td>
                                <td> {{ $task->assigned_by }} </td>
                                <td> {{ $task->deadline }} </td>

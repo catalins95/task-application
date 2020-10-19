@@ -30,11 +30,11 @@ class TaskController extends Controller
         ]);
     }
 
-    public function edit(Task $task)
+    public function view(Task $task)
     {
-
+        $users = DB::table('users')->get();
         // return task index view with paginated tasks
-        return view('edit_task', compact('task'));
+        return view('view_task', compact('task', 'users'));
     }
 
     public function index_create()
@@ -66,6 +66,7 @@ class TaskController extends Controller
         $data = $this->validate($request, [
             'title' => 'required|string|max:255',
             'deadline' => 'required',
+            'details' => 'required',
             'assigned_by' => 'max:255',
             'assigned_to' => 'max:255',
         ]);
@@ -73,6 +74,7 @@ class TaskController extends Controller
         // create a new incomplete task with the given title
         Auth::user()->tasks()->create([
             'title' => $data['title'],
+            'details' => $data['details'],
             'assigned_by' => Auth::user()->name,
             'deadline' => $data['deadline'],
             'assigned_to' => $data['assigned_to'],
