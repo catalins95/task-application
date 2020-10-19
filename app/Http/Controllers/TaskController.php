@@ -30,6 +30,12 @@ class TaskController extends Controller
         ]);
     }
 
+    public function edit(Task $task)
+    {
+
+        // return task index view with paginated tasks
+        return view('edit_task', compact('task'));
+    }
 
     public function index_create()
     {
