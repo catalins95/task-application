@@ -73,7 +73,10 @@ class TaskController extends Controller
             'is_complete' => false,
         ]);
         //Update user_id pentru ca nu imi mergea din array-ul de mai sus
-        Auth::user()->tasks()->update(['user_id' => $data['assigned_to']]);
+        Auth::user()->tasks()
+            ->orderByDesc('id')
+            ->take(1)
+            ->update(['user_id' => $data['assigned_to']]);
 
         // flash a success message to the session
         session()->flash('status', 'Task Created for UserID '.$data['assigned_to']);
