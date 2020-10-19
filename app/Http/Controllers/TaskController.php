@@ -37,6 +37,33 @@ class TaskController extends Controller
         return view('view_task', compact('task', 'users'));
     }
 
+    public function edit(Task $task, Request $request)
+    {
+        $users = DB::table('users')->get();
+        //$tasks = DB::table('tables')->where('id', $id)->get();
+        // validate the given request
+        $data = $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'deadline' => 'required',
+            'details' => 'required',
+            'assigned_by' => 'max:255',
+            'assigned_to' => 'max:255',
+        ]);
+
+        // update the new task info and save it
+        $task->assigned_to = $data['assigned_to'];
+        $task->deadline = $data['deadline'];
+        $task->title = $data['title'];
+        $task->details = $data['details'];
+        $task->save();
+
+        // flash a success message to the session
+        session()->flash('status', 'Task Edited !');
+
+        // return task index view with paginated tasks
+        return view('view_task', compact('task', 'users'));
+    }
+
     public function index_create()
     {
          $users = DB::table('users')->get();

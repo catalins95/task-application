@@ -21,6 +21,7 @@
 
                 <div class="card-body">
                    <table class="table table-striped">
+                      <form method="POST" action="{{ route('edit_task', $task->id) }}">
                           <tr>
                               <td>Task Id:</td> 
                                 <td>
@@ -59,7 +60,7 @@
                           <tr>
                               <td>DeadLine:</td> 
                                 <td>
-                                  @if (Auth::user()->level < 5)
+                                  @if (Auth::user()->level < 9)
                                     {{ $task->deadline }}
                                   @else
                                         <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" value='{{ $task->deadline }}'/>
@@ -74,7 +75,7 @@
                           <tr>
                               <td>Task Title:</td> 
                                 <td>
-                                  @if (Auth::user()->level < 5)
+                                  @if (Auth::user()->level < 9)
                                     {{ $task->title }}
                                   @else
                                       <input id="title" name="title" type="text" maxlength="255" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" autocomplete="off" value='{{ $task->title }}'/>
@@ -87,7 +88,25 @@
                                 </td>
 
                           </tr>
-                      
+                          <tr>
+                              <td>Task Details:</td> 
+                                <td>
+                                      <textarea id="details" name="details" type="textbox" maxlength="255" class="form-control{{ $errors->has('details') ? ' is-invalid' : '' }}" autocomplete="off" rows="3" cols="50">
+{{ $task->details }}
+                                       </textarea>
+                                      @if ($errors->has('details'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('details') }}</strong>
+                                          </span>
+                                      @endif
+                                </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                <button type="submit" class="btn btn-primary">Edit Task</button>
+                              </td>
+                           </tr>
+                    </form>
                    </table>
 
 
