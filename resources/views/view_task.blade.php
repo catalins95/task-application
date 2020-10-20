@@ -20,8 +20,10 @@
                   </div>
 
                 <div class="card-body">
+                  <form method="POST" action="{{ route('edit_task', $task->id) }}">
+                    @csrf
                    <table class="table table-striped">
-                      <form method="POST" action="{{ route('edit_task', $task->id) }}">
+                      
                           <tr>
                               <td>Task Id:</td> 
                                 <td>
@@ -106,9 +108,9 @@
                                 <button type="submit" class="btn btn-primary">Edit Task</button>
                               </td>
                            </tr>
-                    </form>
+                    
                    </table>
-
+                </form>
 
                 </div>
             </div>

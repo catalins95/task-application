@@ -60,8 +60,9 @@ class TaskController extends Controller
         // flash a success message to the session
         session()->flash('status', 'Task Edited !');
 
-        // return task index view with paginated tasks
-        return view('view_task', compact('task', 'users'));
+        // return at tasks list after editing
+        //return view('view_task', compact('task', 'users'));
+        return redirect('/tasks');
     }
 
     public function index_create()
