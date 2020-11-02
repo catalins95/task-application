@@ -10,6 +10,15 @@
                 </div>
             @endif
 
+            @if (session('tasks_expired'))
+                <script type="text/javascript">
+                  alert("WARNING: You have exceeded the deadline for your tasks !");
+                </script>
+                <div class="alert alert-danger" role="alert">
+                    {{ session('tasks_expired') }}
+                </div>
+            @endif
+
             
             <div class="card">
                 <div class="card-header">Tasks</div>
@@ -72,4 +81,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

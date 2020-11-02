@@ -6,6 +6,8 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class TaskController extends Controller
 {
@@ -16,6 +18,15 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $datetime_now = Carbon::now()->add(2, 'hours');
+        $expired_tasks = 0;
+
+        // Carbon - primele incercari
+        // in DB, date-time se salveaza in formatul 'an-luna-ziTora:minut' , trebuie scos acel "T"
+        //$datetime = str_replace('T', ' ', '2020-11-02T15:31'); //lets get rid of the "T"
+        //$datetime = Carbon::createFromFormat('Y-m-d H:i', $datetime);
+        //echo $datetime;
+
         // paginate the authorized user's tasks with 10 per page
         $tasks = Auth::user()
             ->tasks()
@@ -24,10 +35,24 @@ class TaskController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
+        foreach ($tasks as $task) {
+            $task->deadline = str_replace('T', ' ', $task->deadline); //lets get rid of the "T"
+            $task->deadline = Carbon::createFromFormat('Y-m-d H:i', $task->deadline);
+            //echo $task->deadline->diffInMinutes($datetime_now);
+
+            //check if task-deadline is 'expired', if yes -> the number of tasks-expired increase with 1
+            if($task->deadline->isPast()) $expired_tasks++;
+        }
+
+        //activate the message for expired
+        if($expired_tasks != 0) {
+            session()->flash('tasks_expired', "You have exceeded the deadline for $expired_tasks tasks");
+        }
+
         // return task index view with paginated tasks
         return view('tasks', [
             'tasks' => $tasks
-        ]);
+        ], compact('datetime_now', 'expired_tasks'));
     }
 
     public function view(Task $task)
@@ -78,7 +103,6 @@ class TaskController extends Controller
         // return task index view with paginated tasks
         return view('create_task', [
             'tasks' => $tasks
-
         ], compact('users'));
     }
 

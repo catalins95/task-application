@@ -40,7 +40,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>
-                            <font color='blue'>Current Date & Time </font> <font color='green'>-></font>  <font color='red'>{{ $datetime }}</font>
+                            <font color='blue'>Current Date & Time </font> <font color='green'>-></font>  <font color='red'>{{ $datetime_now }}</font>
                         </b>
                 </center>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
