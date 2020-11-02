@@ -41,7 +41,10 @@ class TaskController extends Controller
             //echo $task->deadline->diffInMinutes($datetime_now);
 
             //check if task-deadline is 'expired', if yes -> the number of tasks-expired increase with 1
-            if($task->deadline->isPast()) $expired_tasks++;
+            if($task->deadline->isPast()) 
+            {
+                if($task->is_complete == 0) $expired_tasks++;
+            }
         }
 
         //activate the message for expired
