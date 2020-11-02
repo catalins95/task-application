@@ -21,7 +21,15 @@
 
             
             <div class="card">
-                <div class="card-header">Tasks</div>
+              <center>
+                <div class="card-header">Tasks List
+                    <br>
+                    <b>
+                      <font color='blue'>Current Date & Time </font> <font color='green'>-></font>
+                      <font color='red'>{{ $datetime_now ?? '' }}</font>
+                    </b>
+                  </center>
+                </div>
 
                 <div class="card-body">
                    <table class="table table-striped">

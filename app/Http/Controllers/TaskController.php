@@ -46,7 +46,7 @@ class TaskController extends Controller
 
         //activate the message for expired
         if($expired_tasks != 0) {
-            session()->flash('tasks_expired', "You have exceeded the deadline for $expired_tasks tasks");
+            session()->flash('tasks_expired', "You have exceeded the deadline for $expired_tasks tasks!");
         }
 
         // return task index view with paginated tasks
