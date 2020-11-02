@@ -35,7 +35,7 @@
                                 </span>
                             @endif
 
-                            Task Deadline: <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" />
+                            Task Deadline: <input id="deadline" name="deadline" type="datetime-local" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" />
                             @if ($errors->has('deadline'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('deadline') }}</strong>

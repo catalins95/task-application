@@ -65,7 +65,7 @@
                                   @if (Auth::user()->level < 9)
                                     {{ $task->deadline }}
                                   @else
-                                        <input id="deadline" name="deadline" type="date" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" value='{{ $task->deadline }}'/>
+                                        <input id="deadline" name="deadline" type="datetime-local" maxlength="255" class="form-control{{ $errors->has('deadline') ? ' is-invalid' : '' }}" autocomplete="off" value='{{ $task->deadline }}'/>
                                       </td>
                                       @if ($errors->has('deadline'))
                                           <span class="invalid-feedback" role="alert">
