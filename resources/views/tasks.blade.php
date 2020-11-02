@@ -53,7 +53,12 @@
                                   </a>
                                </td>
                                <td> {{ $task->assigned_by }} </td>
-                               <td> {{ $task->deadline }} </td>
+                               <td> 
+                                @if ($task_array[$task->id] == 'expired')
+                                  <font color='red'>⚠</font>
+                                @endif
+                                {{ $task->deadline }} 
+                               </td>
                                <td class="text-right">
 
                                   <form method="POST" >

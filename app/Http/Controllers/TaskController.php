@@ -20,6 +20,7 @@ class TaskController extends Controller
     {
         $datetime_now = Carbon::now()->add(2, 'hours');
         $expired_tasks = 0;
+        $task_array = [];
 
         // Carbon - primele incercari
         // in DB, date-time se salveaza in formatul 'an-luna-ziTora:minut' , trebuie scos acel "T"
@@ -43,8 +44,15 @@ class TaskController extends Controller
             //check if task-deadline is 'expired', if yes -> the number of tasks-expired increase with 1
             if($task->deadline->isPast()) 
             {
-                if($task->is_complete == 0) $expired_tasks++;
+                if($task->is_complete == 0) 
+                {
+                    $expired_tasks++;
+                    $task_array[$task->id] = "expired";
+                }
+                else $task_array[$task->id] = "alive";
             }
+            else $task_array[$task->id] = "alive";
+            //var_dump($task_array);
         }
 
         //activate the message for expired
@@ -55,7 +63,7 @@ class TaskController extends Controller
         // return task index view with paginated tasks
         return view('tasks', [
             'tasks' => $tasks
-        ], compact('datetime_now', 'expired_tasks'));
+        ], compact('datetime_now', 'expired_tasks', 'task_array'));
     }
 
     public function view(Task $task)
